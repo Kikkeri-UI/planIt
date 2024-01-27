@@ -1,0 +1,29 @@
+@import "../../styles.scss";
+
+
+.navbar{
+    @include gradient;
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem;
+
+    .navbar-brand{
+        font-weight: 700;
+        color: $gray-900;
+        // padding-right: 2rem;
+    }
+    
+    .navbar-nav a{
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: $gray-900;
+        @include media-breakpoint-down(sm){
+            font-size: 1rem;
+        }
+    }
+
+    & + & {
+        margin-left: 1.5rem; 
+     }
+}
+  
+  
