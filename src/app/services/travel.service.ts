@@ -3,6 +3,7 @@ import { HttpClientModule, HttpHeaders, HttpParams, HttpClient} from '@angular/c
 import { environment } from '../environments/environment';
 import {Root} from '../models/travel.model';
 import { Observable } from 'rxjs';
+import {Result} from '../models/hotels.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +26,16 @@ export class TarvelService {
     })
   }
 
-  // getSpecificTravelInfo(cityName:string,specifics:string){
-  //   return this.http.get<Result>(environment.travelApiBaseUrl, {
-  //     headers:new HttpHeaders()
-  //     .set(environment.XRapidAPIKeyName,environment.XRapidAPIKeyValue)
-  //     .set(environment.XRapidAPIHostName,environment.XRapidAPIHostValue),
-  //     params: new HttpParams()
-  //     .set('query', cityName)
-  //     .set('query',specifics)
-  //     .set('lang','en_US')
-  //     .set('unit','km')
-  //     .set('mode','json')
-  //   })
-  // }
+  getHotelListByCityName(locationId:number): Observable<Result>{
+    return this.http.get<Result>(environment.hotelApiBaseUrl, {
+      headers:new HttpHeaders()
+      .set(environment.XRapidAPIKeyName,environment.XRapidAPIKeyValue)
+      .set(environment.XRapidAPIHostName,environment.XRapidAPIHostValue),
+      params:new HttpParams()
+      .set('location_id',locationId)
+      .set('adults',1)
+      .set('rooms',1)
+      .set('nights',2)
+    })
+  }
 }

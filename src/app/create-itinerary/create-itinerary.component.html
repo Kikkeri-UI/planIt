@@ -39,15 +39,18 @@
 </section>
 
 <section id="data-grid" class="container data-grid mt-5" *ngIf="results">
-  <h2>We got data</h2>
-  <div class="row row-cols-1 row-cols-md-2 g-4 p-5">
-    <div class="col" *ngFor="let item of filteredArray">
-      <div class="card">
-        <img src="{{ item.result_object.photo.images.small.url }}" class="card-img-top" alt="{{ item.result_object.name }}">
+  <h2 class="py-5">{{cityName}} Itineraries</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4 p-5">
+    <div class="col" *ngFor="let item of filteredArray" >
+      <div class="card h-100">
+        <img src="{{ item.result_object.photo.images.small.url }}" class="card-img-top card-img" alt="{{ item.result_object.name }}">
         <div class="card-body">
           <h5 class="card-title">{{ item.result_object.name }}</h5>
           <p class="card-text">{{ item.result_object.description }}</p>
         </div>
+        <!-- <div class="card-footer">
+          <small class="text-body-secondary">Last updated 3 mins ago</small>
+        </div> -->
       </div>
     </div>
   </div>
