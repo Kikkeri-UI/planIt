@@ -19,7 +19,7 @@ export class TarvelService {
       .set(environment.XRapidAPIHostName,environment.XRapidAPIHostValue),
       params: new HttpParams()
       .set('query', cityName)
-      .set('limit',10)
+      .set('limit',20)
       .set('lang','en_US')
       .set('unit','km')
       .set('mode','json')

@@ -14,12 +14,17 @@ export class CreateItineraryComponent {
   results: any;
   filteredArray: Array<any> = [];
   locationId: any;
+  ttdsvg:any;
+  attractionsvg:any;
+  hotelssvg:any;
+  actsvg: any;
 
   constructor(private travelService: TarvelService) { }
 
   setHotelKeyWord() {
     this.keyword = 'hotels';
     this.placeHolder = 'Hotel name or destination';
+    this.cityName = '';
   }
 
   setAttractionsKeyWord() {
@@ -45,14 +50,18 @@ export class CreateItineraryComponent {
           if (this.results[i].result_type != 'geos') {
             this.filteredArray.push(this.results[i]);
           }
+          else{
+            this.locationId = this.results[i].result_object.location_id;
+            console.log(this.locationId);
+          }
         }
-        this.locationId = this.results[0].result_object.location_id;
+        //this.locationId = this.results[0].result_object.location_id;
 
 
         switch (this.keyword) {
           case 'hotels':
             this.filteredArray = this.filteredArray.filter((item: any) => item.result_type === 'lodging');
-            this.getHotelData(this.locationId);
+            //this.getHotelData(this.locationId);
             break;
           case 'attractions':
             this.filteredArray = this.filteredArray.filter((item: any) => item.result_type === 'things_to_do' || item.result_type === 'activities');
@@ -64,11 +73,14 @@ export class CreateItineraryComponent {
             break;
           default:
             const things_to_do = this.filteredArray.filter((item: any) => item.result_type === 'things_to_do');
+            this.ttdsvg = true;
             console.log(things_to_do);
             const activities = this.filteredArray.filter((item: any) => item.result_type === 'activities');
+            this.actsvg = true; 
             console.log(activities);
             const lodging = this.filteredArray.filter((item: any) => item.result_type === 'lodging');
             console.log(lodging);
+            this.hotelssvg = true;
         }
 
         console.log(this.filteredArray);
@@ -76,14 +88,14 @@ export class CreateItineraryComponent {
     });
   }
 
-  getHotelData(locationId: number) {
-    this.travelService.getHotelListByCityName(locationId).subscribe({
-      next: (response) => {
-        console.log(response);
-      }
-    })
+  // getHotelData(locationId: number) {
+  //   this.travelService.getHotelListByCityName(locationId).subscribe({
+  //     next: (response) => {
+  //       console.log(response);
+  //     }
+  //   })
 
-  }
+  // }
 
 
 }
